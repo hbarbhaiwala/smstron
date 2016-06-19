@@ -14,15 +14,37 @@ app.all('/receive_sms/', function(request, response) {
     var text = request.param('Text');
 
     console.log ('From : ' + from_number + ' To : ' + to_number + ' Text : ' + text);
+});
 
+app.all('/send_sms/', function(request, response) {
+    // Send a sms
+    console.log ('Attempting to send a sms');
+    var p = plivo.RestAPI({
+        authId: process.env.PVLIO_AUTH_ID,
+        authToken: process.env.PVLIO_AUTH_TKN
+    });
+
+    var params = {
+        'src': '17322814363', // Sender's phone number with country code
+        'dst' : '18054915684', // Receiver's phone Number with country code
+        'text' : "Hi, message from Plivo" // Your SMS Text Message - English
+        //'text' : "こんにちは、元気ですか？" // Your SMS Text Message - Japanese
+        //'text' : "Ce est texte généré aléatoirement" // Your SMS Text Message - French
+        'url' : "https://smstron.herokuapp.com/report/", // The URL to which with the status of the message is sent
+        'method' : "GET" // The method used to call the url
+    };
+
+    // Prints the complete response
+    p.send_message(params, function (status, response) {
+        console.log('Status: ', status);
+        console.log('API Response:\n', response);
+    });
+});
+
+app.all('/report/', function(request, response) {
+    console.log('SMS delivery status : ', request, response);
 });
 
 app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
 });
-
-
-/*
-Sample Output
-From : 1111111111 To : 2222222222 Text : Hello
-*/
