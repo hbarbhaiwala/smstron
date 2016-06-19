@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "body-parser": "^1.15.1",
     "express": "^4.14.0",
-    "plivo": "^0.3.3"
+    "plivo": "^0.3.3",
+    "request": "^2.72.0"
   }
 }
