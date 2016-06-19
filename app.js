@@ -17,6 +17,10 @@ app.all('/receive_sms/', function(request, response) {
     var text = request.param('Text');
 
     console.log ('From : ' + from_number + ' To : ' + to_number + ' Text : ' + text);
+
+    response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+    response.write('<html><head><title>Hello Noder!</title></head><body>');
+    response.end();
 });
 
 app.all('/send_sms/', function(request, response) {
