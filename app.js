@@ -20,6 +20,8 @@ app.all('/receive_sms/', function(request, response) {
 
     response.writeHead(200, "OK", {'Content-Type': 'text/html'});
     response.write('<html><head><title>Hello Noder!</title></head><body>');
+    response.write('<p>From : ' + from_number + ' To : ' + to_number + ' Text : ' + text);
+    response.write('</p></body></html>');
     response.end();
 });
 
