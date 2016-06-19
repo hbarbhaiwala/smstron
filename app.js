@@ -6,6 +6,9 @@ app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
 app.all('/receive_sms/', function(request, response) {
+
+    console.log ('Receiving a SMS: ', request);
+
     // Sender's phone number
     var from_number = request.param('From');
     // Receiver's phone number - Plivo number
@@ -18,7 +21,7 @@ app.all('/receive_sms/', function(request, response) {
 
 app.all('/send_sms/', function(request, response) {
     // Send a sms
-    console.log ('Attempting to send a sms');
+    console.log ('Attempting to send a SMS');
     var p = plivo.RestAPI({
         authId: process.env.PVLIO_AUTH_ID,
         authToken: process.env.PVLIO_AUTH_TKN
