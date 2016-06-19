@@ -1,20 +1,24 @@
 var plivo = require('plivo');
 var express = require('express');
+var bodyParser = require("body-parser");
 var app = express();
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
 
-app.all('/receive_sms/', function(request, response) {
+app.post('/receive_sms/', function(request, response) {
 
     console.log ('Receiving a SMS: ', request);
 
     // Sender's phone number
-    var from_number = request.param('From');
+    var from_number = request.body.from;
     // Receiver's phone number - Plivo number
-    var to_number = request.param('To');
+    var to_number = request.body.to;
     // The text which was received
-    var text = request.param('Text');
+    var text = request.body.text;
 
     console.log ('From : ' + from_number + ' To : ' + to_number + ' Text : ' + text);
 
