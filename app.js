@@ -27,7 +27,7 @@ app.all('/send_sms/', function(request, response) {
     var params = {
         'src': '17322814363', // Sender's phone number with country code
         'dst' : '18054915684', // Receiver's phone Number with country code
-        'text' : "Hi, message from Plivo" // Your SMS Text Message - English
+        'text' : "Hi, message from Plivo", // Your SMS Text Message - English
         //'text' : "こんにちは、元気ですか？" // Your SMS Text Message - Japanese
         //'text' : "Ce est texte généré aléatoirement" // Your SMS Text Message - French
         'url' : "https://smstron.herokuapp.com/report/", // The URL to which with the status of the message is sent
