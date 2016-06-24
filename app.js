@@ -39,15 +39,20 @@ function processTextMessage(text) {
     var response;
 
     if (query.includes("refund")) {
-        response = "Your refund of 27.33 USD was initiated on June 17, 2016. The current status of that refund is 'Completed'.";
+        response = "Your refund of $27.33 was initiated on June 24 2016. The current status of the refund is 'Paid'";
     } else {
         if (query.includes("resend")) {
-            response = "Your itinerary details have been sent to the email address on record.";
+            response = "Your Itinerary details have been sent to the email address on record: kkulkarni@expedia.com";
         } else {
-            response = "Hotel: MGM Las Vegas\n" +
-                "Checkin Date: August 10, 2016\n" +
-                "Checkout Datet: August 15, 2016\n" +
-                "Address: 234, Hollyworld Ave, LV 98052";
+            if (query.includes("trip")) {
+            response = "Hotel: TI - Treasure Island Hotel and Casino" +
+                "Checkin Date: August 10, 2016" +
+                "Checkout Date: August 15, 2016" +
+                "Address: 3300 Las Vegas Blvd S Las Vegas, NV - 89109" +
+                "Phone: 1702894-7111";
+            } else {
+                response = "Our customer service agents can help you with this. We have made a note of it. Please call us at 1-800-EXPEDIA.";
+            }
         }
     }
     return response;
@@ -62,10 +67,11 @@ function send_sms(from_number, to_number, response_text) {
     });
 
     var params = {
-        'src': to_number,     // Sender's phone number with country code
+        'src' : to_number,    // Sender's phone number with country code
         'dst' : from_number,  // Receiver's phone Number with country code
         'text' : response_text, // Your SMS Text Message
         'url' : "https://smstron.herokuapp.com/report/", // The URL to which with the status of the message is sent
+        'log' : false,
         'method' : "GET" // The method used to call the url
     };
 
