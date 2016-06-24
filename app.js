@@ -35,7 +35,22 @@ app.post('/receive_sms/', function(request, response) {
 });
 
 function processTextMessage(text) {
-    return 'processing: ' + text;
+    var query = text.toLowerCase();
+    var response;
+
+    if (query.includes("refund")) {
+        response = "Your refund of 27.33 USD was initiated on June 17, 2016. The current status of that refund is 'Completed'.";
+    } else {
+        if (query.includes("resend")) {
+            response = "Your itinerary details have been sent to the email address on record.";
+        } else {
+            response = "Hotel: MGM Las Vegas\n" +
+                "Checkin Date: August 10, 2016\n" +
+                "Checkout Datet: August 15, 2016\n" +
+                "Address: 234, Hollyworld Ave, LV 98052";
+        }
+    }
+    return response;
 }
 
 function send_sms(from_number, to_number, response_text) {
@@ -63,6 +78,16 @@ function send_sms(from_number, to_number, response_text) {
 
 app.all('/report/', function(request, response) {
     console.log('SMS delivery status : ', request, response);
+
+    var from_number = request.body.From;
+    var to_number = request.body.To;
+    var status = request.body.Status;
+
+    response.writeHead(200, "OK", {'Content-Type': 'text/html'});
+    response.write('<html><head><title>Report for following message</title></head><body>');
+    response.write('<p>From : ' + from_number + ' To : ' + to_number + ' Status : ' + status + '</p>');
+    response.write('</body></html>');
+    response.end();
 });
 
 app.listen(app.get('port'), function() {
