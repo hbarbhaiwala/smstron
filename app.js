@@ -39,19 +39,19 @@ function processTextMessage(text) {
     var response;
 
     if (query.includes("refund")) {
-        response = "Your refund of $27.33 was initiated on June 24 2016. The current status of the refund is 'Paid'";
+        response = "Your refund of 27.33 USD was initiated on June 24, 2016. The current status of the refund is 'Paid'.";
     } else {
         if (query.includes("resend")) {
             response = "Your Itinerary details have been sent to the email address on record: kkulkarni@expedia.com";
         } else {
             if (query.includes("trip")) {
-            response = "Hotel: TI - Treasure Island Hotel and Casino" +
-                "Checkin Date: August 10, 2016" +
-                "Checkout Date: August 15, 2016" +
-                "Address: 3300 Las Vegas Blvd S Las Vegas, NV - 89109" +
+            response = "Hotel: TI - Treasure Island Hotel and Casino\n" +
+                "Checkin Date: August 10, 2016\n" +
+                "Checkout Date: August 15, 2016\n" +
+                "Address: 3300 Las Vegas Blvd S Las Vegas, NV - 89109\n" +
                 "Phone: 1702894-7111";
             } else {
-                response = "Our customer service agents can help you with this. We have made a note of it. Please call us at 1-800-EXPEDIA.";
+                response = "Our customer service agents can help you with this. We have made a note of it. Please call us at 1-800-EXPEDIA (1-800-397-3342)";
             }
         }
     }
