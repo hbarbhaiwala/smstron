@@ -47,8 +47,8 @@ function send_sms(from_number, to_number, response_text) {
     });
 
     var params = {
-        'src': from_number, // Sender's phone number with country code
-        'dst' : to_number,  // Receiver's phone Number with country code
+        'src': to_number,     // Sender's phone number with country code
+        'dst' : from_number,  // Receiver's phone Number with country code
         'text' : response_text, // Your SMS Text Message
         'url' : "https://smstron.herokuapp.com/report/", // The URL to which with the status of the message is sent
         'method' : "GET" // The method used to call the url
